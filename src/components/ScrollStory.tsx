@@ -5,35 +5,81 @@ import { SmartImage } from './SmartImage';
 
 export function ScrollStory({ chapters }: { chapters: StoryChapter[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const stageRef = useRef<HTMLDivElement>(null);
   const chapterRefs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
-    const elements = chapterRefs.current.filter((element): element is HTMLElement => element !== null);
+    let frame = 0;
 
-    if (elements.length === 0 || typeof IntersectionObserver === 'undefined') {
-      return;
-    }
+    const updateActiveChapter = () => {
+      frame = 0;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleIndexes = entries
-          .filter((entry) => entry.isIntersecting)
-          .map((entry) => Number((entry.target as HTMLElement).dataset.storyIndex));
+      const elements = chapterRefs.current.filter(
+        (element): element is HTMLElement => element !== null,
+      );
 
-        if (visibleIndexes.length > 0) {
-          setActiveIndex(Math.max(...visibleIndexes));
+      if (elements.length === 0) {
+        return;
+      }
+
+      const stageRect = stageRef.current?.getBoundingClientRect();
+      const stageBottom =
+        stageRect && stageRect.height > 0 ? Math.max(stageRect.bottom, 0) : 0;
+      const readingStart = Math.min(stageBottom, window.innerHeight * 0.8);
+      const readingLine = readingStart + (window.innerHeight - readingStart) * 0.35;
+
+      let nextIndex = 0;
+      let smallestDistance = Number.POSITIVE_INFINITY;
+
+      elements.forEach((element, index) => {
+        const rect = element.getBoundingClientRect();
+
+        if (rect.top <= readingLine && rect.bottom > readingLine) {
+          nextIndex = index;
+          smallestDistance = 0;
+          return;
         }
-      },
-      { rootMargin: '-45% 0px -45% 0px', threshold: 0 },
-    );
 
-    elements.forEach((element) => observer.observe(element));
-    return () => observer.disconnect();
+        if (smallestDistance === 0) {
+          return;
+        }
+
+        const distance = Math.min(
+          Math.abs(rect.top - readingLine),
+          Math.abs(rect.bottom - readingLine),
+        );
+
+        if (distance < smallestDistance) {
+          smallestDistance = distance;
+          nextIndex = index;
+        }
+      });
+
+      setActiveIndex((current) => (current === nextIndex ? current : nextIndex));
+    };
+
+    const scheduleUpdate = () => {
+      if (frame === 0) {
+        frame = window.requestAnimationFrame(updateActiveChapter);
+      }
+    };
+
+    updateActiveChapter();
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate);
+
+    return () => {
+      window.removeEventListener('scroll', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate);
+      if (frame !== 0) {
+        window.cancelAnimationFrame(frame);
+      }
+    };
   }, [chapters]);
 
   return (
     <div className="story-layout">
-      <div className="story-stage" aria-hidden="true">
+      <div className="story-stage" aria-hidden="true" ref={stageRef}>
         <div className="story-stage__frames">
           {chapters.map((chapter, index) => (
             <SmartImage
