@@ -9,11 +9,7 @@ export function ScrollStory({ chapters }: { chapters: StoryChapter[] }) {
   const chapterRefs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
-    let frame = 0;
-
     const updateActiveChapter = () => {
-      frame = 0;
-
       const elements = chapterRefs.current.filter(
         (element): element is HTMLElement => element !== null,
       );
@@ -58,22 +54,13 @@ export function ScrollStory({ chapters }: { chapters: StoryChapter[] }) {
       setActiveIndex((current) => (current === nextIndex ? current : nextIndex));
     };
 
-    const scheduleUpdate = () => {
-      if (frame === 0) {
-        frame = window.requestAnimationFrame(updateActiveChapter);
-      }
-    };
-
     updateActiveChapter();
-    window.addEventListener('scroll', scheduleUpdate, { passive: true });
-    window.addEventListener('resize', scheduleUpdate);
+    window.addEventListener('scroll', updateActiveChapter, { passive: true });
+    window.addEventListener('resize', updateActiveChapter);
 
     return () => {
-      window.removeEventListener('scroll', scheduleUpdate);
-      window.removeEventListener('resize', scheduleUpdate);
-      if (frame !== 0) {
-        window.cancelAnimationFrame(frame);
-      }
+      window.removeEventListener('scroll', updateActiveChapter);
+      window.removeEventListener('resize', updateActiveChapter);
     };
   }, [chapters]);
 
