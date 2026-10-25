@@ -11,12 +11,11 @@ const worktree = mkdtempSync(join(tmpdir(), 'marrywho-pages-'));
 
 try {
   run(['worktree', 'add', '--detach', worktree]);
-  run(['checkout', '--orphan', 'gh-pages'], { cwd: worktree });
   run(['rm', '-rf', '.'], { cwd: worktree });
   cpSync('dist', worktree, { recursive: true });
   run(['add', '-A'], { cwd: worktree });
   run(['commit', '-m', 'Publish site build'], { cwd: worktree });
-  run(['push', 'origin', 'gh-pages', '--force'], { cwd: worktree });
+  run(['push', 'origin', 'HEAD:gh-pages', '--force'], { cwd: worktree });
 } finally {
   run(['worktree', 'remove', '--force', worktree]);
   rmSync(worktree, { recursive: true, force: true });
