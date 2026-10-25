@@ -2,8 +2,9 @@
 
 Página única em português para o casamento de Lorenna e Bruno, em 25 de abril de 2027, às 16h
 (horário de Brasília). O site é estático, sem backend, em modo escuro, e reúne capa com contagem
-regressiva, história do casal, cerimônia, lista de 65 presentes com contribuição por PIX e
-confirmação de presença.
+regressiva, história do casal, cerimônia, lista de 65 presentes com pagamento por PIX, confirmação
+de presença e recados. Não há banco de dados nem envio automático de mensagens: confirmações e
+recados abrem o WhatsApp com o texto pronto.
 
 ## Requisitos
 
@@ -29,9 +30,9 @@ npm run typecheck  # apenas TypeScript
 npm run preview    # serve o build local
 ```
 
-Os testes cobrem apenas lógica pura: contagem regressiva, formatação de moeda pt-BR, cálculo de
-frações com mínimo de R$ 5, filtro/ordenação/paginação de presentes, detecção de cotas, resumo de
-RSVP e codificação do link de WhatsApp, além da formatação do valor PIX. Não há testes de DOM.
+Os testes cobrem apenas lógica pura: contagem regressiva, formatação de moeda pt-BR, filtro/ordenação/
+paginação de presentes, detecção de cotas, payload PIX (CRC16 e campo de valor), resumo de RSVP,
+recado e codificação dos links de WhatsApp. Não há testes de DOM.
 
 ## Conteúdo editável
 
@@ -51,32 +52,25 @@ Em `src/content/couple.ts`, altere `weddingDateIso` e `weddingTimestamp`. O fuso
 `America/Sao_Paulo` (`-03:00`). Atualize também `dateLabel`, `dateShortLabel` e `timeLabel`, que são
 os textos exibidos. A contagem regressiva usa `weddingTimestamp` e nunca mostra valores negativos.
 
-### Configurar o WhatsApp do RSVP
+### WhatsApp das confirmações e recados
 
-Em `src/content/rsvp.ts`, o campo `whatsappNumber` aceita um número em formato internacional (só
-dígitos, por exemplo `5531999999999`) ou `null`.
+O número fica em `src/content/contact.ts` (`whatsappNumber`, formato internacional só com dígitos).
+O valor atual é `351967195639`. Confirmação de presença e recados usam o mesmo número: ao enviar, o
+site abre `https://wa.me/<numero>` com a mensagem pronta e mantém um botão **Copiar** como
+alternativa. Nada é enviado sem o convidado tocar em enviar no WhatsApp, e nenhum dado é armazenado.
 
-- Com um número: o envio abre `https://wa.me/<numero>` com o resumo preenchido.
-- Com `null` (valor atual): o site não abre o WhatsApp; mostra o resumo com o botão principal
-  **Copiar resumo** e instruções para enviar a Lorenna ou Bruno manualmente.
+## PIX: valor, QR code e copia e cola
 
-Nenhum dado do formulário é armazenado ou enviado para outro lugar.
+O QR code é gerado no navegador com a biblioteca `qrcode`, a partir de um payload BR Code montado em
+`src/lib/pix.ts` (CRC16 próprio, testado). O valor do presente entra no campo `54` do payload, então
+o convidado paga o valor cheio já preenchido no aplicativo do banco.
 
-## PIX: trocar o QR code e o copia e cola
+- Recebedor, chave, cidade e txid: `src/content/pix.ts`.
+- Textos do painel PIX: `src/content/pix.ts` (`pix`).
+- Fallback caso a geração do QR falhe: `public/img/pix-qr.jpg`.
 
-O PIX é **estático** e **sem valor embutido**. O convidado escolhe o valor no site e digita esse
-valor no aplicativo do banco ao pagar. Não existe chave PIX de telefone neste projeto.
-
-Para atualizar os dados reais:
-
-1. Substitua `public/img/pix-qr.jpg` pela imagem do QR code (a original do PDF está em
-   `research/pix-qr-original.jpg`).
-2. Atualize `copyPasteCode` em `src/content/pix.ts` com o código copia e cola exato do banco.
-3. Se necessário, ajuste `qrAlt` e as instruções no mesmo arquivo.
-
-Não é preciso gerar payload BR Code, instalar biblioteca de QR code ou alterar o valor do PIX no
-código. O valor escolhido aparece no painel, pode ser copiado pelo botão **Copiar valor** e deve ser
-digitado no aplicativo do banco.
+Se a chave PIX mudar, atualize `pixMerchant` em `src/content/pix.ts`; o QR e o copia e cola passam a
+ser gerados com os novos dados automaticamente.
 
 ## Assets
 
@@ -92,8 +86,17 @@ self-hosted em `src/styles/fonts/`; o site não depende de CDN externo em tempo 
 
 ## Deploy no GitHub Pages
 
-O workflow em `.github/workflows/deploy.yml` roda `npm ci`, `npm test` e `npm run build`, e publica
-`dist/` no GitHub Pages a cada push em `main`, no repositório `MateusCambraiaGHP/MarryWho`.
+O site é publicado em https://mateuscambraiaghp.github.io/MarryWho/ a partir da branch `gh-pages` do
+repositório `MateusCambraiaGHP/MarryWho` (o Pages serve o conteúdo da raiz dessa branch).
+
+Para publicar uma atualização:
+
+```bash
+node scripts/publish-pages.mjs
+```
+
+O script roda `npm run build`, cria uma worktree temporária, gera a branch `gh-pages` com o conteúdo
+de `dist/` e faz push force.
 
 O build usa `base: '/MarryWho/'` por padrão. Para publicar em outro caminho, defina `VITE_BASE` no
 ambiente antes do build:
