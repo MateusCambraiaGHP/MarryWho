@@ -41,7 +41,7 @@ export const storyPhotos: StoryPhoto[] = [
   },
   {
     src: 'img/casal-04.jpg',
-    alt: 'Lorenna e Bruno abraçados no jardim, com o chapéu de palha e as montanhas ao fundo',
+    alt: 'Lorenna e Bruno caminhando de mãos dadas diante da parede branca da casa',
     width: 1200,
     height: 1800,
   },
