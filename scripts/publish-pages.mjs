@@ -5,7 +5,11 @@ import { join } from 'node:path';
 
 const run = (args, options = {}) => execFileSync('git', args, { stdio: 'inherit', ...options });
 
-execFileSync('npm', ['run', 'build'], { stdio: 'inherit', shell: true });
+execFileSync('npm', ['run', 'build'], {
+  stdio: 'inherit',
+  shell: true,
+  env: { ...process.env, VITE_BASE: '/MarryWho/' },
+});
 
 const worktree = mkdtempSync(join(tmpdir(), 'marrywho-pages-'));
 
