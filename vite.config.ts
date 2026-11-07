@@ -4,9 +4,10 @@ import { loadEnv } from 'vite';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', 'VITE_');
+  const base = process.env.VITE_BASE || env.VITE_BASE || '/MarryWho/';
 
   return {
-    base: env.VITE_BASE || '/MarryWho/',
+    base,
     plugins: [react()],
     test: {
       environment: 'node',
