@@ -23,27 +23,27 @@ export const story = {
 export const storyPhotos: StoryPhoto[] = [
   {
     src: 'img/casal-01.jpg',
-    alt: 'Lorenna sorrindo de perto enquanto Bruno segura o seu rosto',
-    width: 1000,
-    height: 667,
+    alt: 'Lorenna e Bruno caminhando de mãos dadas em frente à casa amarela',
+    width: 1200,
+    height: 1800,
   },
   {
     src: 'img/casal-02.jpg',
-    alt: 'Lorenna e Bruno abraçados em um deck de madeira diante das montanhas',
-    width: 1000,
-    height: 667,
+    alt: 'Lorenna sorrindo de perto enquanto Bruno segura o seu rosto',
+    width: 1800,
+    height: 1200,
   },
   {
     src: 'img/casal-03.jpg',
-    alt: 'Fonte de água em um jardim com palmeiras, no espaço onde a cerimônia será realizada',
-    width: 617,
-    height: 324,
+    alt: 'Lorenna e Bruno caminhando de mãos dadas no deck de madeira diante das montanhas',
+    width: 1200,
+    height: 1800,
   },
   {
     src: 'img/casal-04.jpg',
-    alt: 'Lorenna e Bruno caminhando de mãos dadas entre palmeiras e montanhas',
-    width: 1000,
-    height: 647,
+    alt: 'Lorenna e Bruno abraçados no jardim, com o chapéu de palha e as montanhas ao fundo',
+    width: 1200,
+    height: 1800,
   },
 ];
 

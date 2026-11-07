@@ -1,6 +1,9 @@
 import { story, storyChapters } from '../content/story';
+import { storyGallery } from '../content/storyGallery';
 import { ScrollStory } from './ScrollStory';
 import { SectionHeading } from './SectionHeading';
+import { StoryGallery } from './StoryGallery';
+import { StoryVideo } from './StoryVideo';
 
 export function Couple() {
   return (
@@ -9,6 +12,10 @@ export function Couple() {
         <SectionHeading eyebrow="Nós dois" title={story.heading} titleId="couple-title" subtitle={story.subtitle} />
 
         <ScrollStory chapters={storyChapters} />
+
+        <StoryGallery photos={storyGallery} />
+
+        <StoryVideo />
 
         <div className="story__text">
           <p className="story__closing">{story.closing}</p>
