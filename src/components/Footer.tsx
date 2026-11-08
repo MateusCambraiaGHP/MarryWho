@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { couple } from '../content/couple';
 import { navigationItems } from '../content/navigation';
+import { LegalLinks } from './LegalLinks';
 
 type ShareStatus = 'idle' | 'shared' | 'copied' | 'failed';
 
@@ -83,8 +84,10 @@ export function Footer() {
         </div>
 
         <p className="footer__made">
-          feito com amor <span aria-hidden="true">♡</span>
+          feito com amor <span aria-hidden="true">❤️</span>
         </p>
+
+        <LegalLinks />
       </div>
     </footer>
   );
