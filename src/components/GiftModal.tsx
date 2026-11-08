@@ -114,6 +114,9 @@ export function GiftModal({ gift, onClose }: { gift: Gift | null; onClose: () =>
               </a>
               .
             </p>
+            <p className="other-payments__text other-payments__hint">
+              {cardPayment.giftHint} <strong>{gift.name}</strong> e escolha o pagamento com cartão.
+            </p>
             {cardPayment.paragraphs.map((paragraph) => (
               <p className="other-payments__text" key={paragraph.slice(0, 32)}>
                 {paragraph}

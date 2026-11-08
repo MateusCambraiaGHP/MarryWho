@@ -1753,6 +1753,16 @@ html.modal-open {
   margin-top: 0.65rem;
 }
 
+.other-payments__hint {
+  margin-top: 0.55rem;
+  color: var(--color-ivory);
+}
+
+.other-payments__hint strong {
+  color: var(--color-gold-strong);
+  font-weight: 700;
+}
+
 .other-payments__link {
   color: var(--color-gold-strong);
   text-decoration: underline;
