@@ -57,7 +57,7 @@ const giftSeeds: GiftSeed[] = [
   { id: '217270908', name: "Mixer 3 em 1 Vermelho", price: 269.66, image: 'img/gifts/217270908.jpg', category: 'eletroportateis' },
   { id: '220134759', name: "Multiprocessador Britânia 5 Em 1 Bmp2000 1300w Cor Prateado", price: 530.84, image: 'img/gifts/220134759.jpg', category: 'eletroportateis' },
   { id: '217270885', name: "Panela de Arroz Elétrica Electrolux", price: 297.09, image: 'img/gifts/217270885.png', category: 'eletroportateis' },
-  { id: '217270955', name: "Patrocine a lua de mel dos noivos", price: 16857.33, image: 'img/gifts/217270955.png', category: 'lua-de-mel' },
+  { id: '217270955', name: "Patrocine a lua de mel dos noivos", price: 17000, image: 'img/gifts/217270955.png', category: 'lua-de-mel' },
   { id: '217270910', name: "Pipoqueira Elétrica sem Óleo", price: 285.75, image: 'img/gifts/217270910.jpg', category: 'eletroportateis' },
   { id: '220143641', name: "Pix da paz interior da noiva", price: 430.27, image: 'img/gifts/220143641.png', category: 'lua-de-mel' },
   { id: '220144205', name: "Presente sem erro: deixe os noivos escolherem!", price: 584.10, image: 'img/gifts/220144205.png', category: 'personalizados' },
