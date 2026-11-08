@@ -14,7 +14,6 @@ export type Gift = {
   price: number;
   image: string;
   category: GiftCategoryId;
-  isQuota: boolean;
 };
 
 export type GiftSort = 'az' | 'menor-preco' | 'maior-preco';
@@ -40,33 +39,6 @@ export const giftSortOptions: { id: GiftSort; label: string }[] = [
   { id: 'menor-preco', label: 'Menor preço' },
   { id: 'maior-preco', label: 'Maior preço' },
 ];
-
-const quotaMarkers = [
-  'cota:',
-  'patrocine',
-  'fundo',
-  'fundos',
-  'pix da',
-  'presente sem erro',
-  'um pouquinho de cada um',
-  'uma ajudinha',
-  'ajude o noivo',
-  'kit sobrevivencia',
-  'terapia preventiva',
-];
-
-export function normalizeText(value: string): string {
-  return value
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .trim();
-}
-
-export function isQuotaGift(name: string): boolean {
-  const normalizedName = normalizeText(name);
-  return quotaMarkers.some((marker) => normalizedName.startsWith(marker));
-}
 
 export function filterGifts(gifts: Gift[], category: GiftFilter): Gift[] {
   if (category === 'todas') {

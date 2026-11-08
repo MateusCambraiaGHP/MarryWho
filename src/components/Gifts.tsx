@@ -152,11 +152,7 @@ export function Gifts() {
                     </div>
                     <div className="gift-card__body">
                       <h3 className="gift-card__name">{gift.name}</h3>
-                      {gift.isQuota ? (
-                        <p className="gift-card__quota">Contribua com o valor que quiser</p>
-                      ) : (
-                        <p className="gift-card__price">{formatBRL(gift.price)}</p>
-                      )}
+                      <p className="gift-card__price">{formatBRL(gift.price)}</p>
                       <button
                         className="button button--gold button--full"
                         type="button"

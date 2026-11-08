@@ -2,14 +2,13 @@ import { describe, expect, it } from 'vitest';
 import {
   GIFTS_PAGE_SIZE,
   filterGifts,
-  isQuotaGift,
   paginateGifts,
   sortGifts,
   type Gift,
 } from './gifts';
 
 function makeGift(id: string, name: string, price: number, category: Gift['category'] = 'cozinha'): Gift {
-  return { id, name, price, image: `img/gifts/${id}.jpg`, category, isQuota: isQuotaGift(name) };
+  return { id, name, price, image: `img/gifts/${id}.jpg`, category };
 }
 
 const catalog: Gift[] = [
@@ -19,40 +18,6 @@ const catalog: Gift[] = [
   makeGift('4', 'COTA: o primeiro tijolinho', 132.38, 'lua-de-mel'),
   makeGift('5', 'Frigideira Antiaderente', 269.63),
 ];
-
-describe('isQuotaGift', () => {
-  it('detects every quota prefix used by the wedding list', () => {
-    const quotaNames = [
-      'COTA: Acabamento de luxo',
-      'Patrocine a lua de mel dos noivos',
-      'Fundo para boletos surpresa',
-      'Fundos para não surtar com a reforma',
-      'Pix da paz interior da noiva',
-      'Presente sem erro: deixe os noivos escolherem!',
-      'Um pouquinho de cada um constrói o nosso sonho!',
-      'Uma ajudinha para os móveis planejados',
-      'Ajude o noivo a bancar seus hobbies',
-      'Kit sobrevivência para os dias de TPM',
-      'Terapia preventiva da noiva',
-      'Fundo para os engenheiros tirarem férias',
-    ];
-
-    for (const name of quotaNames) {
-      expect(isQuotaGift(name), name).toBe(true);
-    }
-  });
-
-  it('does not flag regular products', () => {
-    expect(isQuotaGift('Batedeira Planetária')).toBe(false);
-    expect(isQuotaGift('Jogo de Panelas Preto - 5 Peças')).toBe(false);
-    expect(isQuotaGift('Smart TV LED 40 Polegadas')).toBe(false);
-    expect(isQuotaGift('Primeiro churrasco na casa nova')).toBe(false);
-  });
-
-  it('ignores case and accents when detecting quotas', () => {
-    expect(isQuotaGift('kit sobrevivencia para os dias de TPM')).toBe(true);
-  });
-});
 
 describe('filterGifts', () => {
   it('keeps only gifts from the selected category', () => {

@@ -3,6 +3,7 @@ import type { Gift } from '../lib/gifts';
 import { giftCategories } from '../lib/gifts';
 import { formatBRL } from '../lib/currency';
 import { assetUrl } from '../lib/asset';
+import { cardPayment } from '../content/payment';
 import { PixPanel } from './PixPanel';
 import { SmartImage } from './SmartImage';
 
@@ -96,6 +97,29 @@ export function GiftModal({ gift, onClose }: { gift: Gift | null; onClose: () =>
           </div>
 
           <PixPanel amount={gift.price} giftName={gift.name} />
+
+          <section className="other-payments" aria-labelledby="other-payments-title">
+            <h3 className="other-payments__title" id="other-payments-title">
+              {cardPayment.heading}
+            </h3>
+            <p className="other-payments__text">
+              {cardPayment.intro}{' '}
+              <a
+                className="other-payments__link"
+                href={cardPayment.linkUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {cardPayment.linkLabel}
+              </a>
+              .
+            </p>
+            {cardPayment.paragraphs.map((paragraph) => (
+              <p className="other-payments__text" key={paragraph.slice(0, 32)}>
+                {paragraph}
+              </p>
+            ))}
+          </section>
         </div>
       ) : null}
     </dialog>

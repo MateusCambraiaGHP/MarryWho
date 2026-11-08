@@ -1,5 +1,4 @@
 import type { Gift } from '../lib/gifts';
-import { isQuotaGift } from '../lib/gifts';
 
 type GiftSeed = {
   id: string;
@@ -77,7 +76,4 @@ const giftSeeds: GiftSeed[] = [
   { id: '220134675', name: "Xiaomi Robot Vacuum H50 Pro", price: 3833.31, image: 'img/gifts/220134675.jpg', category: 'eletroportateis' },
 ];
 
-export const gifts: Gift[] = giftSeeds.map((gift) => ({
-  ...gift,
-  isQuota: isQuotaGift(gift.name),
-}));
+export const gifts: Gift[] = giftSeeds;

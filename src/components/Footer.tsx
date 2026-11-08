@@ -51,8 +51,7 @@ export function Footer() {
         <div className="footer__pix">
           <p className="footer__pix-title">Presenteie por PIX</p>
           <p className="footer__pix-text">
-            Escolha um presente e contribua com o valor que quiser, direto pelo aplicativo do seu
-            banco.
+            Escolha um presente e pague o valor dele por PIX, direto pelo aplicativo do seu banco.
           </p>
           <a className="button button--ghost button--small" href="#presentes">
             Ver lista de presentes
