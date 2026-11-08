@@ -55,7 +55,7 @@ os textos exibidos. A contagem regressiva usa `weddingTimestamp` e nunca mostra 
 ### WhatsApp das confirmações e recados
 
 O número fica em `src/content/contact.ts` (`whatsappNumber`, formato internacional só com dígitos).
-O valor atual é `351967195639`. Confirmação de presença e recados usam o mesmo número: ao enviar, o
+O valor atual é `5531982625111`. Confirmação de presença e recados usam o mesmo número: ao enviar, o
 site abre `https://wa.me/<numero>` com a mensagem pronta e mantém um botão **Copiar** como
 alternativa. Nada é enviado sem o convidado tocar em enviar no WhatsApp, e nenhum dado é armazenado.
 

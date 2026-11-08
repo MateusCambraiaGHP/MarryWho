@@ -27,9 +27,9 @@ describe('buildGuestMessage', () => {
 
 describe('guest message WhatsApp link', () => {
   it('points to the couple WhatsApp number with the encoded message', () => {
-    const url = buildWhatsAppUrl('351967195639', 'Recado para Lorenna & Bruno');
+    const url = buildWhatsAppUrl('5531982625111', 'Recado para Lorenna & Bruno');
 
-    expect(url).toContain('https://wa.me/351967195639?text=');
+    expect(url).toContain('https://wa.me/5531982625111?text=');
     expect(url).toContain(encodeURIComponent('Recado para Lorenna & Bruno'));
   });
 });
