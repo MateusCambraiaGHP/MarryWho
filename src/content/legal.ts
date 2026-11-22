@@ -23,7 +23,7 @@ export const legal = {
       {
         heading: 'Quais dados coletamos',
         paragraphs: [
-          'O site não possui cadastro, banco de dados nem servidor próprio para receber formulários. Os dados que você digita nas áreas de confirmação de presença e de recados (nome, e-mail opcional e mensagem) permanecem apenas no seu navegador enquanto a página está aberta.',
+          'O site não possui cadastro, banco de dados nem servidor próprio para receber formulários. Os dados que você digita na área de recados (nome, e-mail opcional e mensagem) permanecem apenas no seu navegador enquanto a página está aberta.',
           'Esses dados só saem do seu dispositivo se você tocar no botão de envio: nesse momento o site abre o WhatsApp com a mensagem pronta. A conversa e o conteúdo enviado passam a ser tratados pelo WhatsApp, conforme as políticas dele.',
         ],
       },
@@ -97,7 +97,8 @@ export const legal = {
       {
         heading: 'Confirmação de presença e recados',
         paragraphs: [
-          'A confirmação de presença e os recados são enviados pelo próprio convidado por meio do WhatsApp. O site apenas monta a mensagem; nada é enviado automaticamente e nenhum dado é armazenado por nós.',
+          'A confirmação de presença acontece no site do Casar.com, em link indicado na seção "Confirme sua presença". Os dados informados lá são tratados pela plataforma, conforme as políticas dela.',
+          'Os recados são enviados pelo próprio convidado por meio do WhatsApp. O site apenas monta a mensagem; nada é enviado automaticamente e nenhum dado é armazenado por nós.',
         ],
       },
       {

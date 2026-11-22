@@ -1,9 +1,9 @@
 # Lorenna & Bruno — site de casamento
 
-Página única em português para o casamento de Lorenna e Bruno, em 25 de abril de 2027, às 16h
+Página única em português para o casamento de Lorenna e Bruno, em 25 de abril de 2027, às 15h30
 (horário de Brasília). O site é estático, sem backend, em modo escuro, e reúne capa com contagem
 regressiva, história do casal, cerimônia, lista de 65 presentes com pagamento por PIX, confirmação
-de presença e recados. Não há banco de dados nem envio automático de mensagens: confirmações e
+de presença no Casar.com e recados. Não há banco de dados nem envio automático de mensagens: recados
 recados abrem o WhatsApp com o texto pronto.
 
 ## Requisitos
@@ -31,8 +31,8 @@ npm run preview    # serve o build local
 ```
 
 Os testes cobrem apenas lógica pura: contagem regressiva, formatação de moeda pt-BR, filtro/ordenação/
-paginação de presentes, detecção de cotas, payload PIX (CRC16 e campo de valor), resumo de RSVP,
-recado e codificação dos links de WhatsApp. Não há testes de DOM.
+paginação de presentes, payload PIX (CRC16 e campo de valor), recado e codificação dos links de
+WhatsApp. Não há testes de DOM.
 
 ## Conteúdo editável
 
@@ -44,7 +44,7 @@ Todo o conteúdo fica em `src/content/`:
 - `gifts.ts` — os 65 presentes (nome, preço, imagem e categoria).
 - `giftsPage.ts` — textos de introdução da lista.
 - `pix.ts` — QR code, código copia e cola e instruções.
-- `rsvp.ts` — número de WhatsApp opcional, textos de sucesso e aviso de privacidade.
+- `rsvp.ts` — textos e link da confirmação de presença no Casar.com.
 
 ### Trocar a data ou o horário
 
@@ -52,12 +52,12 @@ Em `src/content/couple.ts`, altere `weddingDateIso` e `weddingTimestamp`. O fuso
 `America/Sao_Paulo` (`-03:00`). Atualize também `dateLabel`, `dateShortLabel` e `timeLabel`, que são
 os textos exibidos. A contagem regressiva usa `weddingTimestamp` e nunca mostra valores negativos.
 
-### WhatsApp das confirmações e recados
+### WhatsApp dos recados
 
 O número fica em `src/content/contact.ts` (`whatsappNumber`, formato internacional só com dígitos).
-O valor atual é `5531982625111`. Confirmação de presença e recados usam o mesmo número: ao enviar, o
-site abre `https://wa.me/<numero>` com a mensagem pronta e mantém um botão **Copiar** como
-alternativa. Nada é enviado sem o convidado tocar em enviar no WhatsApp, e nenhum dado é armazenado.
+O valor atual é `5531982625111`. Ao enviar um recado, o site abre `https://wa.me/<numero>` com a
+mensagem pronta e mantém um botão **Copiar** como alternativa. Nada é enviado sem o convidado tocar
+em enviar no WhatsApp, e nenhum dado é armazenado.
 
 ## PIX: valor, QR code e copia e cola
 

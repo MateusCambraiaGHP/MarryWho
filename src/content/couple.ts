@@ -5,10 +5,10 @@ export const couple = {
   monogram: 'L & B',
   dateLabel: '25 de abril de 2027',
   dateShortLabel: '25 DE ABRIL DE 2027',
-  timeLabel: '16h',
+  timeLabel: '15h30',
   cityLabel: 'Contagem, MG',
-  weddingDateIso: '2027-04-25T16:00:00-03:00',
-  weddingTimestamp: Date.parse('2027-04-25T16:00:00-03:00'),
+  weddingDateIso: '2027-04-25T15:30:00-03:00',
+  weddingTimestamp: Date.parse('2027-04-25T15:30:00-03:00'),
 };
 
 export const heroImage = {

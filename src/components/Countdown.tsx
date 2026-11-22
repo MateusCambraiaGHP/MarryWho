@@ -31,7 +31,7 @@ export function Countdown() {
   return (
     <div className="countdown" role="timer">
       <p className="visually-hidden">
-        Contagem regressiva para 25 de abril de 2027, às 16h. Faltam {countdown.days} dias,{' '}
+        Contagem regressiva para 25 de abril de 2027, às 15h30. Faltam {countdown.days} dias,{' '}
         {countdown.hours} horas, {countdown.minutes} minutos e {countdown.seconds} segundos.
       </p>
       <p className="countdown__label" aria-hidden="true">

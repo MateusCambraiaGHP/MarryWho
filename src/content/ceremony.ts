@@ -1,10 +1,10 @@
 export const ceremony = {
   heading: 'CERIMÔNIA',
   dateLabel: 'Domingo, 25 de abril de 2027',
-  timeLabel: '16h',
+  timeLabel: '15h30',
   intro:
     'Gostaríamos muito de contar com a presença de todos vocês no momento em que nossa união será abençoada diante de Deus. A cerimônia será rápida e começará pontualmente, por isso pedimos que cheguem com alguns minutos de antecedência.',
-  punctualityNote: 'Pedimos, por favor, pontualidade: a cerimônia começa às 16h.',
+  punctualityNote: 'Pedimos, por favor, pontualidade: a cerimônia começa às 15h30.',
   address: {
     street: 'Av. dos Trompetes, 47',
     district: 'Estâncias Imperiais',
